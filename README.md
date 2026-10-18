@@ -112,3 +112,5 @@ The theme and the font script are licensed under the [Apache License 2.0](LICENS
 and Red Hat Mono are licensed under the SIL Open Font License 1.1; their licence texts are in
 `www/azentrius/`. The Apache License grants no rights to the name Azentrius or its marks; see
 [NOTICE](NOTICE).
+
+Made by [Azentrius](https://azentrius.de).
