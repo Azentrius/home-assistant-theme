@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.2 – 2026-10-18
+
+Fixes the download with HACS, this time for good.
+
+- **HACS:** for a theme, HACS builds the address of a zip release with `tags/` in it, which GitHub
+  answers with "not found", so 1.0.1 could not be installed either. Releases now carry
+  `azentrius.yaml` itself, next to the archive and `SHA256SUMS`; HACS downloads these files into
+  `/config/themes/azentrius/`, and Home Assistant reads the YAML file among them. `hacs.json` no
+  longer asks for a zip release, and `azentrius-hacs.zip` is gone.
+
 ## 1.0.1 – 2026-10-18
 
 Fixes the download with HACS.

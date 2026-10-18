@@ -22,18 +22,17 @@ jobs:
         run: pip install -r tools/requirements.txt
       - name: Theme, font script, fonts, licences and changelog
         run: make check
-      - name: Release archives (match the repository, unpack only where they should, built twice to the same bytes)
+      - name: Release archive (matches the repository, unpacks only into themes/ and www/azentrius/, built twice to the same bytes)
         run: |
           make package
           sha256sum --ignore-missing -c SHA256SUMS
+          (cd themes && sha256sum --ignore-missing -c ../SHA256SUMS) | grep -qx 'azentrius.yaml: OK'
           if unzip -Z1 azentrius-home-assistant-theme-*.zip | grep -vxE 'themes/azentrius\.yaml|www/azentrius/[A-Za-z0-9._-]+'; then
             echo "::error::The archive contains files outside themes/azentrius.yaml and www/azentrius/."
             exit 1
           fi
-          [ "$(unzip -Z1 azentrius-hacs.zip)" = "azentrius.yaml" ] || { echo "::error::azentrius-hacs.zip must hold only azentrius.yaml."; exit 1; }
-          unzip -p azentrius-hacs.zip azentrius.yaml | cmp - themes/azentrius.yaml
           cp SHA256SUMS "$RUNNER_TEMP/first.sha256"
-          rm -f azentrius-home-assistant-theme-*.zip azentrius-hacs.zip SHA256SUMS
+          rm -f azentrius-home-assistant-theme-*.zip SHA256SUMS
           make package > /dev/null
           cmp SHA256SUMS "$RUNNER_TEMP/first.sha256"
       - name: Release notes for the current version
