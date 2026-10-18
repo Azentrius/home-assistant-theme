@@ -3,6 +3,14 @@
 A Home Assistant theme in the colours and type of the Azentrius Design System: ink, paper and gold,
 set in DM Sans. Light and dark mode follow the setting in your Home Assistant profile.
 
+| Light mode | Dark mode |
+| --- | --- |
+| ![Analytics settings in light mode: a white card on paper, switches in ink](docs/light.png) | ![Analytics settings in dark mode: a dark card on ink, switches in gold](docs/dark.png) |
+| ![Dialog for a new dashboard in light mode, with text fields and switches](docs/light-dialog.png) | ![Dialog for a new dashboard in dark mode, with text fields and switches](docs/dark-dialog.png) |
+
+The screenshots show the public [Home Assistant demo](https://demo.home-assistant.io) (frontend
+20260930.4) with this theme and its fonts.
+
 ## What it changes
 
 - **Action colour:** ink in light mode, gold in dark mode. Buttons, switches, sliders, tabs and the
