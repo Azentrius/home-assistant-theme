@@ -1,5 +1,17 @@
 # Changelog
 
+## 1.0.4 – 2026-10-18
+
+Two fixes for dark mode.
+
+- **Avatar:** the initials in the user avatar at the bottom of the sidebar were barely visible in
+  dark mode, dark grey on dark grey. The theme now sets `text-light-primary-color`, so they show in
+  the text colour in both modes.
+- **Input fields:** in dark mode, text fields in dialogs had the same colour as the dialog and showed
+  only their bottom line. They now sit a step darker, on the page ground, and turn lighter on hover.
+  Light mode is unchanged.
+- **README:** new screenshots with both fixes.
+
 ## 1.0.3 – 2026-10-18
 
 Screenshots for the HACS store; the theme is unchanged.
