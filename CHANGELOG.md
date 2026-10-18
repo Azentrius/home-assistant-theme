@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.5 – 2026-10-18
+
+The theme gets its product name; the theme itself is unchanged.
+
+- **README:** the heading names it Azentrius Theme, as the Azentrius design system does. In HACS
+  and in the profile's theme list it stays Azentrius, so installed themes and `frontend.set_theme`
+  keep working.
+- **README:** ends with "Made by Azentrius", like the other Azentrius repositories.
+
 ## 1.0.4 – 2026-10-18
 
 Two fixes for dark mode.
