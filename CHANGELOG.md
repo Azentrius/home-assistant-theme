@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.3 – 2026-10-18
+
+Screenshots for the HACS store; the theme is unchanged.
+
+- **README:** screenshots of a settings page with switches and of a dialog, in light and dark mode,
+  taken in the Home Assistant demo.
+- **HACS:** the validation in CI now runs every check, including the one for images in the README, as
+  the HACS default repositories require.
+
 ## 1.0.2 – 2026-10-18
 
 Fixes the download with HACS, this time for good.

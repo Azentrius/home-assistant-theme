@@ -50,5 +50,3 @@ jobs:
         with:
           category: theme
           comment: "false"
-          # No screenshots in the README yet; the store listing needs them.
-          ignore: images
