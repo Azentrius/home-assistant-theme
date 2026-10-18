@@ -76,10 +76,12 @@ jobs:
           make package
           sha256sum --ignore-missing -c SHA256SUMS
 
-      - name: Build provenance for the archive
+      - name: Build provenance for the archives
         uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
         with:
-          subject-path: azentrius-home-assistant-theme-${{ steps.version.outputs.version }}.zip
+          subject-path: |
+            azentrius-home-assistant-theme-${{ steps.version.outputs.version }}.zip
+            azentrius-hacs.zip
 
       - name: Release notes
         env:
@@ -95,7 +97,7 @@ jobs:
             echo
             echo "### Install"
             echo
-            echo "With HACS: add this repository as a custom repository of the type Theme, then download Azentrius. HACS installs the theme file only."
+            echo "With HACS: add this repository as a custom repository of the type Theme, then download Azentrius. HACS takes \`azentrius-hacs.zip\`, which holds the theme file only."
             echo
             echo "By hand, with the fonts: unpack \`azentrius-home-assistant-theme-$VERSION.zip\` into your Home Assistant configuration folder (\`/config\`). Then follow the README: load the themes folder, add \`/local/azentrius/azentrius.js\` to \`extra_module_url\`, restart, and pick Azentrius in your profile."
             echo
@@ -120,4 +122,4 @@ jobs:
           if [ "$PRERELEASE" = "true" ]; then
             set -- "$@" --prerelease
           fi
-          gh release create "v$VERSION" "azentrius-home-assistant-theme-$VERSION.zip" SHA256SUMS "$@"
+          gh release create "v$VERSION" "azentrius-home-assistant-theme-$VERSION.zip" azentrius-hacs.zip SHA256SUMS "$@"

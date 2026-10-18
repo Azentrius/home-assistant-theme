@@ -25,7 +25,7 @@ values; it adds no content.
 
 1. In HACS, open the menu, choose **Custom repositories** and add
    `https://github.com/Azentrius/home-assistant-theme` with the type **Theme**.
-2. Download **Azentrius**.
+2. Download **Azentrius**. HACS puts the theme into `/config/themes/azentrius/azentrius.yaml`.
 3. Make sure `configuration.yaml` loads the themes folder:
 
    ```yaml
@@ -86,7 +86,8 @@ gh attestation verify azentrius-home-assistant-theme-VERSION.zip --repo Azentriu
 ```
 
 `SHA256SUMS` also lists every file inside the archive, so you can check the unpacked files in
-`/config` the same way.
+`/config` the same way. `azentrius-hacs.zip` is the archive HACS downloads; it holds only the theme
+file.
 
 ## How it is made
 
