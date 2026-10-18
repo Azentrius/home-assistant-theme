@@ -1,5 +1,14 @@
 # Changelog
 
+## 1.0.1 – 2026-10-18
+
+Fixes the download with HACS.
+
+- **HACS:** HACS downloads every file of a theme's release, so 1.0.0 put the archives into
+  `/config/themes/azentrius/` instead of the theme. Releases now carry `azentrius-hacs.zip` with only
+  `azentrius.yaml`, and `hacs.json` points HACS to it (`zip_release`). The theme lands in
+  `/config/themes/azentrius/azentrius.yaml`.
+
 ## 1.0.0 – 2026-10-18
 
 First release: the Azentrius theme for Home Assistant, with light and dark mode and the fonts as an
