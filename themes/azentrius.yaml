@@ -60,6 +60,7 @@ Azentrius:
       dark-primary-color: "#2b2b33"
       darker-primary-color: "#2b2b33"
       light-primary-color: "#e7e4dd"
+      text-light-primary-color: "#0a0a0f"
       ha-color-primary-30: "#2b2b33"
       ha-color-primary-40: "#0a0a0f"
       ha-color-primary-50: "#0a0a0f"
@@ -90,7 +91,7 @@ Azentrius:
       ha-switch-checked-border-color-hover: "#2b2b33"
       ha-switch-checked-thumb-background-color: "#ffffff"
       ha-switch-checked-thumb-border-color: "#ffffff"
-      # Neutral fills, disabled elements and input fields
+      # Neutral fills and disabled elements
       ha-color-fill-neutral-quiet-resting: "#ebe9e4"
       ha-color-fill-neutral-quiet-hover: "#e7e4dd"
       ha-color-fill-neutral-quiet-active: "#ebe9e4"
@@ -112,6 +113,7 @@ Azentrius:
       ha-color-on-disabled-quiet: "#a8a49b"
       ha-color-on-disabled-normal: "#a8a49b"
       ha-color-on-disabled-loud: "#a8a49b"
+      # Input fields: bg-hover in light mode, bg-page in dark mode, so they stand out from dialogs and cards
       ha-color-form-background: "#ebe9e4"
       ha-color-form-background-hover: "#e7e4dd"
       ha-color-form-background-disabled: "#f2f1ee"
@@ -223,6 +225,7 @@ Azentrius:
       dark-primary-color: "#d9be86"
       darker-primary-color: "#d9be86"
       light-primary-color: "#26262f"
+      text-light-primary-color: "#e8e6e0"
       ha-color-primary-30: "#d9be86"
       ha-color-primary-40: "#c8a96e"
       ha-color-primary-50: "#c8a96e"
@@ -253,7 +256,7 @@ Azentrius:
       ha-switch-checked-border-color-hover: "#d9be86"
       ha-switch-checked-thumb-background-color: "#0a0a0f"
       ha-switch-checked-thumb-border-color: "#0a0a0f"
-      # Neutral fills, disabled elements and input fields
+      # Neutral fills and disabled elements
       ha-color-fill-neutral-quiet-resting: "#1c1c26"
       ha-color-fill-neutral-quiet-hover: "#26262f"
       ha-color-fill-neutral-quiet-active: "#1c1c26"
@@ -275,8 +278,9 @@ Azentrius:
       ha-color-on-disabled-quiet: "#5a5862"
       ha-color-on-disabled-normal: "#5a5862"
       ha-color-on-disabled-loud: "#5a5862"
-      ha-color-form-background: "#1c1c26"
-      ha-color-form-background-hover: "#26262f"
+      # Input fields: bg-hover in light mode, bg-page in dark mode, so they stand out from dialogs and cards
+      ha-color-form-background: "#0a0a0f"
+      ha-color-form-background-hover: "#14141c"
       ha-color-form-background-disabled: "#0a0a0f"
       input-fill-color: "#1c1c26"
       input-ink-color: "#e8e6e0"
