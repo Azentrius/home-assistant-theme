@@ -92,9 +92,10 @@ def check_repository():
     hacs = json.loads((ROOT / "hacs.json").read_text(encoding="utf-8"))
     if hacs.get("name") != NAME:
         fail(f"hacs.json: name must be {NAME}")
-    # Without zip_release, HACS downloads every file of a release into the theme folder.
-    if hacs.get("zip_release") is not True or not str(hacs.get("filename", "")).endswith(".zip"):
-        fail("hacs.json: needs zip_release and the filename of the HACS archive")
+    # HACS builds the asset URL of a zip release with "tags/" in it for themes, which GitHub
+    # answers with 404; releases carry azentrius.yaml itself instead.
+    if "zip_release" in hacs:
+        fail("hacs.json: no zip_release; HACS downloads the release's azentrius.yaml")
     version = (ROOT / "VERSION").read_text(encoding="utf-8").strip()
     if not SEMVER.fullmatch(version):
         fail(f"VERSION: {version!r} is not a version like 1.0.0")
