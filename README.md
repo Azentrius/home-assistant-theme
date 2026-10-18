@@ -113,4 +113,4 @@ and Red Hat Mono are licensed under the SIL Open Font License 1.1; their licence
 `www/azentrius/`. The Apache License grants no rights to the name Azentrius or its marks; see
 [NOTICE](NOTICE).
 
-Made by [Azentrius](https://azentrius.de).
+Made by [Azentrius](https://azentrius.com).
