@@ -1,7 +1,8 @@
-# Azentrius for Home Assistant
+# Azentrius Theme
 
 A Home Assistant theme in the colours and type of the Azentrius Design System: ink, paper and gold,
-set in DM Sans. Light and dark mode follow the setting in your Home Assistant profile.
+set in DM Sans. Light and dark mode follow the setting in your Home Assistant profile. In HACS
+and in the profile's theme list it is called **Azentrius**.
 
 | Light mode | Dark mode |
 | --- | --- |
