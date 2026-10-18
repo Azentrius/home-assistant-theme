@@ -1,0 +1,26 @@
+# Dependabot version updates for the check tool in tools/ and the GitHub Actions used in
+# .github/workflows. The theme itself has no package dependencies.
+version: 2
+updates:
+  - package-ecosystem: "pip"
+    directory: "/tools"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    groups:
+      check-tools:
+        patterns:
+          - "*"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "monday"
+      timezone: "Europe/Berlin"
+    open-pull-requests-limit: 5
+    groups:
+      github-actions:
+        patterns:
+          - "*"

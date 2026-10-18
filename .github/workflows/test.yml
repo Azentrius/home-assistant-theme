@@ -1,0 +1,53 @@
+name: test
+
+on:
+  push:
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - name: Check tools
+        run: pip install -r tools/requirements.txt
+      - name: Theme, font script, fonts, licences and changelog
+        run: make check
+      - name: Release archive (matches the repository, unpacks only into themes/ and www/azentrius/, built twice to the same bytes)
+        run: |
+          make package
+          sha256sum --ignore-missing -c SHA256SUMS
+          if unzip -Z1 azentrius-home-assistant-theme-*.zip | grep -vxE 'themes/azentrius\.yaml|www/azentrius/[A-Za-z0-9._-]+'; then
+            echo "::error::The archive contains files outside themes/azentrius.yaml and www/azentrius/."
+            exit 1
+          fi
+          cp SHA256SUMS "$RUNNER_TEMP/first.sha256"
+          rm -f azentrius-home-assistant-theme-*.zip SHA256SUMS
+          make package > /dev/null
+          cmp SHA256SUMS "$RUNNER_TEMP/first.sha256"
+      - name: Release notes for the current version
+        run: tools/release-notes.sh "$(cat VERSION)" > /dev/null
+
+  hacs:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - name: HACS validation
+        uses: hacs/action@1ebf01c408f29afcb6406bd431bc98fd8cbb15aa # main, 2026-06-08
+        with:
+          category: theme
+          comment: "false"
+          # No screenshots in the README yet; the store listing needs them.
+          ignore: images

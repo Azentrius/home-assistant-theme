@@ -1,0 +1,123 @@
+# Makes a release on request: Actions › release › Run workflow (on main).
+# Checks the version, runs all checks, builds the archive and creates the tag vVERSION with a
+# GitHub release (archive, SHA256SUMS, signed build provenance, notes from CHANGELOG.md).
+name: release
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: "Version, e.g. 1.0.1 (empty: the one in VERSION)"
+        required: false
+        default: ""
+      prerelease:
+        description: "Mark as pre-release"
+        type: boolean
+        default: false
+
+permissions:
+  contents: write       # tag and release
+  id-token: write       # signing the build provenance
+  attestations: write   # storing the build provenance
+
+concurrency:
+  group: release
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-24.04
+    timeout-minutes: 10
+    steps:
+      - name: Only from main
+        if: github.ref != 'refs/heads/main'
+        run: |
+          echo "::error::Releases are made from main only (this run: $GITHUB_REF)."
+          exit 1
+
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Check the version
+        id: version
+        env:
+          INPUT_VERSION: ${{ inputs.version }}
+        run: |
+          code=$(cat VERSION)
+          version=${INPUT_VERSION:-$code}
+          version=${version#v}
+          if ! printf '%s\n' "$version" | grep -Eq '^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.]+)?$'; then
+            echo "::error::\"$version\" is not a version like 1.0.1."
+            exit 1
+          fi
+          if [ "$version" != "$code" ]; then
+            echo "::error::Version $version differs from VERSION ($code). Change VERSION first."
+            exit 1
+          fi
+          if git rev-parse -q --verify "refs/tags/v$version" > /dev/null; then
+            echo "::error::Tag v$version exists already."
+            exit 1
+          fi
+          echo "version=$version" >> "$GITHUB_OUTPUT"
+
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Checks
+        run: |
+          pip install -r tools/requirements.txt
+          make check
+
+      - name: Package
+        run: |
+          make package
+          sha256sum --ignore-missing -c SHA256SUMS
+
+      - name: Build provenance for the archive
+        uses: actions/attest-build-provenance@4d101475d8b20a2381f78447822ac1eab6504dd8 # v4.2.2
+        with:
+          subject-path: azentrius-home-assistant-theme-${{ steps.version.outputs.version }}.zip
+
+      - name: Release notes
+        env:
+          VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if tools/release-notes.sh "$VERSION" > notes.md; then
+            echo "Notes from CHANGELOG.md"
+          else
+            echo "::warning::CHANGELOG.md has no section for $VERSION; GitHub writes the notes."
+            : > notes.md
+          fi
+          {
+            echo
+            echo "### Install"
+            echo
+            echo "With HACS: add this repository as a custom repository of the type Theme, then download Azentrius. HACS installs the theme file only."
+            echo
+            echo "By hand, with the fonts: unpack \`azentrius-home-assistant-theme-$VERSION.zip\` into your Home Assistant configuration folder (\`/config\`). Then follow the README: load the themes folder, add \`/local/azentrius/azentrius.js\` to \`extra_module_url\`, restart, and pick Azentrius in your profile."
+            echo
+            echo "Check the download against \`SHA256SUMS\`, and that it was built by this repository's release workflow:"
+            echo
+            echo '```sh'
+            echo "sha256sum --ignore-missing -c SHA256SUMS"
+            echo "gh attestation verify azentrius-home-assistant-theme-$VERSION.zip --repo $GITHUB_REPOSITORY"
+            echo '```'
+          } >> notes.md
+
+      - name: Create the release
+        env:
+          GH_TOKEN: ${{ github.token }}
+          VERSION: ${{ steps.version.outputs.version }}
+          PRERELEASE: ${{ inputs.prerelease }}
+        run: |
+          set -- --target "$GITHUB_SHA" --title "Azentrius for Home Assistant $VERSION" --notes-file notes.md
+          if ! tools/release-notes.sh "$VERSION" > /dev/null; then
+            set -- "$@" --generate-notes
+          fi
+          if [ "$PRERELEASE" = "true" ]; then
+            set -- "$@" --prerelease
+          fi
+          gh release create "v$VERSION" "azentrius-home-assistant-theme-$VERSION.zip" SHA256SUMS "$@"

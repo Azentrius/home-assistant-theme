@@ -1,0 +1,5 @@
+# LF everywhere: Home Assistant and the release archive expect Unix line endings,
+# whatever the checkout platform.
+* text=auto eol=lf
+
+*.woff2 binary

@@ -1,0 +1,15 @@
+Azentrius for Home Assistant
+Copyright 2026 Azentrius
+Licensed under the Apache License, Version 2.0. See LICENSE.
+
+The Apache License grants no rights to the name "Azentrius" or its marks.
+
+This project includes third-party material under its own license:
+
+DM Sans (www/azentrius/DMSans-VF.woff2)
+  Copyright 2014 The DM Sans Project Authors (https://github.com/googlefonts/dm-fonts)
+  SIL Open Font License 1.1, see www/azentrius/OFL-DM-Sans.txt
+
+Red Hat Mono (www/azentrius/RedHatMono-VF.woff2)
+  Copyright 2024 The Red Hat Project Authors (https://github.com/RedHatOfficial/RedHatFont)
+  SIL Open Font License 1.1, see www/azentrius/OFL-Red-Hat-Fonts.txt
