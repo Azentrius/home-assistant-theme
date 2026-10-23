@@ -1,4 +1,4 @@
-// Azentrius for Home Assistant: fonts from /local/azentrius/, no external requests.
+// Azentrius Theme: fonts from /local/azentrius/, no external requests.
 // Generated from the Azentrius Design System. Do not edit by hand.
 // Load it with frontend: extra_module_url: [/local/azentrius/azentrius.js]
 // SPDX-License-Identifier: Apache-2.0
