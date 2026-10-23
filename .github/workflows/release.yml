@@ -115,7 +115,7 @@ jobs:
           VERSION: ${{ steps.version.outputs.version }}
           PRERELEASE: ${{ inputs.prerelease }}
         run: |
-          set -- --target "$GITHUB_SHA" --title "Azentrius for Home Assistant $VERSION" --notes-file notes.md
+          set -- --target "$GITHUB_SHA" --title "Azentrius Theme $VERSION" --notes-file notes.md
           if ! tools/release-notes.sh "$VERSION" > /dev/null; then
             set -- "$@" --generate-notes
           fi
