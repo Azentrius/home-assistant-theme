@@ -1,5 +1,15 @@
 # Changelog
 
+## 1.0.6 – 2026-10-25
+
+The product name in the files and the release title; the theme itself is unchanged.
+
+- **Name:** `NOTICE`, the first line of `themes/azentrius.yaml` and of `www/azentrius/azentrius.js`
+  and the release title say Azentrius Theme, as the README does, instead of "Azentrius for Home
+  Assistant". In HACS and in the profile's theme list it stays Azentrius, so installed themes and
+  `frontend.set_theme` keep working.
+- **README:** "Made by Azentrius" links to azentrius.com.
+
 ## 1.0.5 – 2026-10-18
 
 The theme gets its product name; the theme itself is unchanged.
