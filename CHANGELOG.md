@@ -6,6 +6,7 @@ Azentrius is now one of the HACS default repositories; the theme itself is uncha
 
 - **README:** installing with HACS starts with searching for Azentrius in HACS. Adding the
   repository as a custom repository stays as the fallback.
+- **Release notes:** their install hint starts with the search in HACS as well.
 
 ## 1.0.6 – 2026-10-25
 
