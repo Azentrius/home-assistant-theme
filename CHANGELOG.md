@@ -1,5 +1,12 @@
 # Changelog
 
+## 1.0.7 – 2026-11-01
+
+Azentrius is now one of the HACS default repositories; the theme itself is unchanged.
+
+- **README:** installing with HACS starts with searching for Azentrius in HACS. Adding the
+  repository as a custom repository stays as the fallback.
+
 ## 1.0.6 – 2026-10-25
 
 The product name in the files and the release title; the theme itself is unchanged.

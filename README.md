@@ -32,8 +32,7 @@ values; it adds no content.
 
 ## Install with HACS
 
-1. In HACS, open the menu, choose **Custom repositories** and add
-   `https://github.com/Azentrius/home-assistant-theme` with the type **Theme**.
+1. In HACS, search for **Azentrius** and open it.
 2. Download **Azentrius**. HACS puts the files of the release into `/config/themes/azentrius/`;
    Home Assistant reads `azentrius.yaml` from there and ignores the rest.
 3. Make sure `configuration.yaml` loads the themes folder:
@@ -47,6 +46,11 @@ values; it adds no content.
    added the line above.
 5. Pick **Azentrius** under **Profile › Theme**. To make it the default for everyone, run the action
    `frontend.set_theme` with `name: Azentrius`. A choice in a profile wins over the default.
+
+If HACS does not find Azentrius, for example because its list of repositories is not up to date
+yet, add the repository yourself: in HACS, open the menu, choose **Custom repositories** and add
+`https://github.com/Azentrius/home-assistant-theme` with the type **Theme**. Then continue with
+step 2.
 
 ## Install by hand
 
